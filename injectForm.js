@@ -87,7 +87,7 @@ JustJoinItHelper.proccessData = function(siteElement){
         'Content-Type': 'application/json' 
       },
 	  type: "POST",
-	  url: "jobhelper.brilliancy.pl/justJoinIt",
+	  url: "https://jobhelper.brilliancy.pl/justJoinIt",
 	  data: JSON.stringify(data),
 	  dataType: 'json',
 	  success: success
