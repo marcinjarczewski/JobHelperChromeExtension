@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>JobHelper Options</title></head>
+<link rel="stylesheet" href="thirdParty/coloris.min.css"/>
+<style>
+.clr-picker.clr-open{
+margin-top:150px;
+}
+</style>
+<body style=min-height:400px;>
+<h3>Search for skills:</h3>
+<ul id="skillData">
+
+</ul>
+<button id="addRow">add new skill</button>
+<h3>Proccessed row color:</h3>
+<div class="clr-field" id="proccessedColorDivId" style="color: #e6ffff;"><button aria-labelledby="clr-open-label"></button><input id="proccessedColorId" type="text" value="#e6ffff" data-coloris=""></div>
+<br/>
+<label>
+  <input type="checkbox" id="removeOldBadgesId">
+  Do you want to remove old badges from proccessed row?
+</label>
+<br/>
+<label>
+  <input id="leftPanelId" type="number" min="30" max="100">
+  Left panel (with data) row width (%)
+</label>
+<br/>
+<label>
+  <input id="rightPanelId" type="number" min="0" max="100">
+  Rigth panel (map) row width (%)
+</label>
+<div id="status"></div>
+<button id="save">Save</button>
+
+<script src="options.js"></script>
+<script src="thirdParty/coloris.min.js"></script>
+
+</body>
+</html>

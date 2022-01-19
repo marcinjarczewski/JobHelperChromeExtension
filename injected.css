@@ -1,0 +1,58 @@
+﻿.injected-badge {
+    color: rgb(153, 161, 171);
+    height: 22px;
+    display: inline-block;
+    padding: 0 7px;
+    overflow: hidden;
+    font-size: 11px;
+    min-width: 1ch;
+    line-height: 20px;
+    margin-left: 6px;
+    white-space: nowrap;
+    border-color: rgb(224, 224, 224);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 11px;
+    text-overflow: ellipsis;
+    text-transform: lowercase;
+    background-color: rgb(255, 255, 255);
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  max-width: 100%;
+  background-color: white;
+  color: gray;
+  text-align: center;
+  border-color:gray;
+  border-radius: 6px;
+  padding: 5px 4px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1000;
+  bottom: 100%;
+  left: 40%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.injected-badge.tooltip {
+	max-width:35%;
+}
+.injected-badge.success{
+	    background: rgb(191 255 208);
+}
+
+.injected-badge.description{
+	    background:rgb(255 253 191);
+}
+
+.injected-badge.none{
+	background: rgb(255 180 180 / 52%);
+}
+
+div.row-completed{
+	background-color:rgb(230 255 255);
+}
