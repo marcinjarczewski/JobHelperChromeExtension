@@ -9,8 +9,8 @@
   },
   "permissions": ["activeTab", "declarativeContent", "storage", "scripting", "tabs"],
   "content_scripts" : [{
-	"matches": ["https://justjoin.it/*"],
-	"js" : ["thirdParty/jquery-3.5.1.min.js", "injectForm.js"],
+	"matches": ["https://justjoin.it/*","https://pracuj.pl/*","https://www.pracuj.pl/*"],
+	"js" : ["thirdParty/jquery-3.5.1.min.js","pracujplInject.js", "justJoinItForm.js"],
 	"css": ["injected.css"]
   }],
   "action": {

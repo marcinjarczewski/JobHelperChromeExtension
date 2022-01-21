@@ -17,6 +17,13 @@ function callInjectedScript() {
 	rightPanel: 50,
 	skills:[{name:'.net',searchInDescription: true},{name:'c#',searchInDescription: false},{name:'react',searchInDescription: true}]
   }, function(items) {
-	   document.dispatchEvent(new CustomEvent('injectedEvent', {detail:items}));
+	  if(window.location.href.indexOf("pracuj") > 0)
+	  {
+		document.dispatchEvent(new CustomEvent('pracujplInjectedEvent', {detail:items}));
+	  }
+	  else
+	  {
+		document.dispatchEvent(new CustomEvent('justJoinItInjectedEvent', {detail:items}));
+	  }
   });
 }

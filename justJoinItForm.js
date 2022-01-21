@@ -76,6 +76,7 @@ JustJoinItHelper.proccessData = function(siteElement){
 		}
 		// add css to inform the user about the completed operation
 		$(rowContainer).addClass('row-completed');
+		$(rowContainer).css('background-color', JustJoinItHelper.data.proccessedColor);
 	};
 	 let data = {
 		"Url":url,
@@ -115,6 +116,6 @@ function CreateBadgeTemplate(text, customClass){
 		 return badgeTemplate;
 }
 	
-document.addEventListener('injectedEvent', function (e) {
+document.addEventListener('justJoinItInjectedEvent', function (e) {
   JustJoinItHelper.run(e.detail);
 });
