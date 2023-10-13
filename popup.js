@@ -12,10 +12,11 @@ let clicker = document.getElementById('clicker');
 function callInjectedScript() {
 		  chrome.storage.sync.get({
     proccessedColor: '#e6ffff',
+	apiKey: '',
     removeOldBadges: false,
 	leftPanel: 50,
 	rightPanel: 50,
-	skills:[{name:'.net',searchInDescription: true},{name:'c#',searchInDescription: false},{name:'react',searchInDescription: true}]
+	skills:[{name:'.net',searchInDescription: true},{name:'c#',searchInDescription: false},{name:'vue',searchInDescription: true}]
   }, function(items) {
 	  if(window.location.href.indexOf("pracuj") > 0)
 	  {

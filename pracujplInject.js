@@ -1,28 +1,31 @@
 //Declare global variable. Can be used in the console.
 PracujplHelper ={};
 //Init function. Prepares the data and starts searching for rows.
-PracujplHelper.run = function(inputData){	
+PracujplHelper.run = function (inputData) {
 	PracujplHelper.data = inputData;
 	PracujplHelper.findRecord();
 }
 
 //Search for lines with job offers
-PracujplHelper.findRecord = function(){	
-	let list = $(".offer");
+PracujplHelper.findRecord = function () {
+	let list = $("[data-test*=section-offers]").children();
 	for(let listElem of list)
 	{		
 		if(!$(listElem).hasClass("injected"))
 		{
 			let searchElement = {};
-			let title = $(listElem).find("a.offer-details__title-link");
+			let title = $(listElem).find('a[data-test="link-offer"]');
 			if(title.length > 0)
 			{
 				searchElement = title[0];
+				return PracujplHelper.proccessData(searchElement, listElem);
 			}
-			else{
-				searchElement =  $(listElem).find("a.offer-regions__label")[0];
+			else {
+				//not supported
+				//searchElement =  $(listElem).find("a.offer-regions__label")[0];
 			}
-		    return PracujplHelper.proccessData(searchElement,listElem);
+
+			//return PracujplHelper.proccessData(searchElement, $(searchElement).parent()[0]);
 		};
 	}
 	
@@ -39,9 +42,10 @@ PracujplHelper.proccessData = function(linkContainer, offerContainer){
 		if(!result){
 			return "result error";
 		}
+		debugger;
 		//search for target html containers
-		let titleContainer = $(offerContainer).find(".offer-details")[0];
-		let badgesContainer = $(offerContainer).find(".offer-labels")[0];
+		let titleContainer = $(offerContainer).find("[data-test='offer-additional-info-0']")[0];
+		let badgesContainer = $(offerContainer).find("[data-test='offer-additional-info-1']")[0];
 		//get skills from details
 		let expectedSkills = GetSkillsArray(result.body,"[data-scroll-id*='technologies-expected-1']");
 		let optionalSkills = GetSkillsArray(result.body,"[data-scroll-id*='technologies-optional-1']");

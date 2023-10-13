@@ -4,10 +4,9 @@ JustJoinItHelper ={};
 //Init function. Prepares the data and starts searching for rows.
 JustJoinItHelper.run = function(inputData){	
 	JustJoinItHelper.data = inputData;
-	let div = $(".css-1smbjja")[0];
-	var leftPanel = div.firstChild;
+	let leftPanel = $(".css-1fmajlu")[0];
 	leftPanel.style.flex = "0 0 " +JustJoinItHelper.data.leftPanel + '%';
-	var rightPanel = div.lastChild;
+	let rightPanel = $(".css-120r7wt")[0];
 	rightPanel.style.flex = "0 0 " +JustJoinItHelper.data.rightPanel + '%';
 	JustJoinItHelper.findRecord();
 }
@@ -18,7 +17,7 @@ JustJoinItHelper.findRecord = function(){
 	for(let listElem of list)
 	{
 		
-		if(!$(listElem).hasClass("injected"))
+		if (!$(listElem).parent().hasClass("injected"))
 		{
 		    return JustJoinItHelper.proccessData(listElem);
 		};
@@ -28,18 +27,19 @@ JustJoinItHelper.findRecord = function(){
 	setTimeout(function() { JustJoinItHelper.findRecord(); }, 1000);
 }
 
-JustJoinItHelper.proccessData = function(siteElement){	
+JustJoinItHelper.proccessData = function (siteElement) {
     let url = siteElement.href;
+	let mainContainer = $(siteElement).parent()[0];
 	//mark element as proccessed
-	$(siteElement).addClass("injected");
-	success = function( result ) {
+	$(siteElement).parent().addClass("injected");
+	success = function (result) {
 		//declare some elements based on html structure
-	 	let rowContainer = siteElement.firstChild;
+	 	let rowContainer = mainContainer.lastChild;
 		let dataPartContainer = rowContainer.lastChild;
 		let secondLineContainer = dataPartContainer.lastChild;
 		let firstLineContainer = dataPartContainer.firstChild;
-		let titleContainer = firstLineContainer.firstChild;
-		let badgesContainer = secondLineContainer.lastChild;
+		let titleContainer = rowContainer.firstChild;
+		let badgesContainer = secondLineContainer;
 		if(!result){
 			return "result error";
 		}
@@ -48,6 +48,7 @@ JustJoinItHelper.proccessData = function(siteElement){
 		$(titleContainer).append(CreateBadgeTemplate('Company size:'+result.companySize, "company"));
 		if(result.englishEvaluation && result.englishEvaluation.length > 0)
 		{
+			debugger;
 			$(titleContainer).append(CreateBadgeTemplate('language eval.:'+result.englishEvaluation, "tooltip"));
 		}
 		$(titleContainer).append(CreateBadgeTemplate('offer language:'+result.offerLanguage, "company"));
@@ -75,12 +76,16 @@ JustJoinItHelper.proccessData = function(siteElement){
 			}
 		}
 		// add css to inform the user about the completed operation
-		$(rowContainer).addClass('row-completed');
-		$(rowContainer).css('background-color', JustJoinItHelper.data.proccessedColor);
+		$(mainContainer).addClass('row-completed');
+		$(mainContainer).css('background-color', JustJoinItHelper.data.proccessedColor);
+		if(result.offerLanguage.toLowerCase() == 'english'){
+			$(siteElement).parent().hide();
+		}
 	};
 	 let data = {
 		"Url":url,
-		"Skills":JustJoinItHelper.data.skills
+		"Skills": JustJoinItHelper.data.skills,
+		"ApiKey": JustJoinItHelper.data.apiKey
 	};
 	$.ajax({
 	  headers: { 
@@ -92,11 +97,11 @@ JustJoinItHelper.proccessData = function(siteElement){
 	  data: JSON.stringify(data),
 	  dataType: 'json',
 	  success: success
-	}).done(function(msg){ 
+	}).done(function (msg) {
 		JustJoinItHelper.findRecord();
 	})
     .fail(function(xhr, status, error) {
-        JustJoinItHelper.findRecord();
+		JustJoinItHelper.findRecord();
     });
 }
 
